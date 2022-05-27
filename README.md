@@ -1,1 +1,1 @@
-# whizbuzzer.github.io
+# My website
