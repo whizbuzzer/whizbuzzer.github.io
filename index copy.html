@@ -57,19 +57,9 @@
 								</ul> -->
 							</div>
 							<h2 id="content" align="center">Welcome to my site!</h2>
-							<div class="row">
-								<div class="col-6 col-12-small">
-									<ul class="actions">
-										<li><a href="about_me.html" class="button">About me</a></li>
-									</ul>
-								</div>
-								<div class="col-6 col-12-small" align="right">
-									<ul class="icons">
-										<li><a href="https://github.com/whizbuzzer" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-										<li><a href="https://www.linkedin.com/in/aniket-prabhu/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-									</ul>
-								</div>
-							</div>
+							<ul class="actions">
+								<li><a href="about_me.html" class="button">About me</a></li>
+							</ul>
 						</div>
 					</section>
 
@@ -114,6 +104,24 @@
 										<p>Literature that moved my min and/or heart</p>
 									</header>
 								</article>
+								<!-- <article>
+									<span class="image">
+										<img src="images/pic05.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Consequat</a></h3>
+										<p>Ipsum dolor sit amet</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic06.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="landing.html" class="link">Etiam</a></h3>
+										<p>Feugiat amet tempus</p>
+									</header>
+								</article> -->
 							</section>
 
 						<!-- Two -->
@@ -132,24 +140,46 @@
 					</div>
 
 				<!-- Contact -->
-					<section>
+					<section id="contact">
 						<div class="inner">
-							<div class="row">
-								<div class="col-4 col-12-medium">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="6"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Clear" /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
 									<div class="contact-method">
 										<span class="icon solid alt fa-envelope"></span>
 										<h3>Email</h3>
 										<a href="mailto: RoboAniket@gmail.com">RoboAniket@gmail.com</a>
 									</div>
-								</div>
-								<div class="col-4 col-12-medium">
+								</section>
+								<section>
 									<div class="contact-method">
 										<span class="icon solid alt fa-phone"></span>
 										<h3>Phone</h3>
 										<span>+1 (414) 458-4679 </span>
 									</div>
-								</div>
-								<div class="col-4 col-12-medium">
+								</section>
+								<section>
 									<div class="contact-method">
 										<span class="icon solid alt fa-home"></span>
 										<h3>Address</h3>
@@ -157,15 +187,21 @@
 										Portland, OR 97201<br />
 										United States of America</span>
 									</div>
-								</div>
-							</div>
+								</section>
+							</section>
 						</div>
 					</section>
-					<!-- <hr> -->
 
 				<!-- Footer -->
 					<footer id="footer">
 						<div class="inner">
+							<ul class="icons">
+								<!--<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>-->
+								<li><a href="https://github.com/whizbuzzer" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/aniket-prabhu/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
 							<ul class="copyright">
 								<li>&copy; 2022 Aniket Niranjan Prabhu</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 							</ul>
