@@ -2759,6 +2759,11 @@ input, select, textarea {
 				display: none;
 			}
 
+			.tiles article .video {
+				width: 0%;
+				object-fit: fill;
+			}
+
 			.tiles article header {
 				position: relative;
 				z-index: 3;
