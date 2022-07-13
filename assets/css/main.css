@@ -2760,8 +2760,9 @@ input, select, textarea {
 			}
 
 			.tiles article .video {
-				width: 0%;
-				object-fit: fill;
+				position: absolute;
+				top: 0;
+				left: 0;
 			}
 
 			.tiles article header {
