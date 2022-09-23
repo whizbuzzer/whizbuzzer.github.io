@@ -3065,6 +3065,31 @@ input, select, textarea {
 
 		}
 
+/* Website-Counter */
+body,
+.website-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  height: 100vh;
+}
+
+/* Styles for website counter container */
+.website-counter {
+  background-color: #ff4957;
+  height: 50px;
+  width: 80px;
+  color: white;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
 /* Header */
 
 	@-moz-keyframes reveal-header {
@@ -3897,7 +3922,7 @@ input, select, textarea {
 			text-align: right;
 			text-indent: 8em;
 			top: 0;
-			vertical-align: middle;
+			/* vertical-align: middle; */
 			white-space: nowrap;
 			width: 8em;
 		}
