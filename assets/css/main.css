@@ -3066,7 +3066,7 @@ input, select, textarea {
 		}
 
 /* Website-Counter */
-body,
+/* body,
 .website-counter {
   display: flex;
   justify-content: center;
@@ -3088,7 +3088,7 @@ body {
   font-weight: 700;
   font-size: 25px;
   margin-top: 10px;
-}
+} */
 
 /* Header */
 
