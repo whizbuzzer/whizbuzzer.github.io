@@ -5,6 +5,8 @@
 	Forty by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	Edited by Aniket Niranjan Prabhu.
 */
 
 html, body, div, span, applet, object,
@@ -3981,3 +3983,68 @@ body {
 			opacity: 1;
 			visibility: visible;
 		}
+
+/* Custom helpers */
+.dark-section {
+	background: #000;
+	color: #fff;
+}
+
+.dark-section a {
+	color: #9ad0ff;
+}
+
+.code-dark {
+	background: #0b1e3a;
+	color: #e4ecff;
+	display: block;
+	padding: 1em;
+	border-radius: 0.35em;
+	overflow-x: auto;
+}
+
+.code-dark code {
+	background: transparent;
+	color: inherit;
+}
+
+.code-inline-dark {
+	background: #0b1e3a;
+	color: #e4ecff;
+	padding: 0.1em 0.35em;
+	border-radius: 0.25em;
+}
+
+.info-box {
+	background: #0f2b1f;
+	color: #e8f6ed;
+	padding: 1em;
+	border-radius: 0.35em;
+	margin: 1em 0;
+}
+
+.info-box summary {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	cursor: pointer;
+	font-weight: 700;
+	list-style: none;
+}
+
+.info-box summary::-webkit-details-marker {
+	display: none;
+}
+
+.info-box .info-arrow {
+	margin-left: auto;
+	transition: transform 0.2s ease;
+}
+
+.info-box[open] .info-arrow {
+	transform: rotate(180deg);
+}
+
+.magenta-text {
+	color: #ff3bff;
+}

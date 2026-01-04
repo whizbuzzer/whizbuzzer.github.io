@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<link rel="icon" href="../../images/WhizbuzzerLogoSmall.png">
+		<title>My Literature - Tech - Setting up Github with SSH</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<a href="../../index.html" class="logo"><strong>Dwindlepole</strong> <span>by the Homeless God</span></a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="../../index.html">Home</a></li>
+					<li><a href="../../my_art.html">My Art</a></li>
+					<li><a href="../../my_fav_quotes.html">My Favorite Quotes</a></li>
+					<li><a href="../../my_literature.html">My Literature</a></li>
+					<li><a href="../../my_projects.html">My Projects</a></li>
+				</ul>
+			</nav>
+
+			<!-- Main -->
+			<div id="main" class="alt">
+				<!-- One -->
+				<section id="one" class="dark-section">
+					<div class="inner" align="left">
+						<header class="major">
+							<h1>Setting up Github in your PC with SSH</h1>
+						</header>
+
+						<h2>Introduction</h2>
+						<p>
+							In order to move away from using the <a href="https://github.com/apps/desktop">GitHub Desktop crutch</a> and feel more like a developer I tried doing things through the command line, but it cost me my hair. This is because according to GitHub's blog post <a href="#ref1">[1]</a>, Git no longer accepts account passwords for authenticating Git operations. Instead, you need to use either of these methods:
+						</p>
+						<ol>
+							<li>personal access token (PAT) </li>
+							<li>SSH keys</li>
+						</ol>
+						<p>
+							And to add to the frustration, doing <code class="code-inline-dark">git clone</code> will troll you by asking for your username and password, only to tell you that
+						</p>						
+						<span class="image main">
+							<img
+								src="../../images/my_literature/tech/we_dont_do_that_here.png"
+								alt="We don't do that here"
+								style="width:40%; max-width:480px; display:block; margin:0 auto;"
+							/>
+						</span>
+						<p>
+							Therefore, I have made this guide so that others may avoid the stress that I went through for this silly little problem. In this guide, I will walk you through setting up SSH keys for GitHub on your PC so that you too can use git operations through your terminal and at least feel like a software developer.
+						</p>
+
+						<h2>SSH vs Personal Access Token (PAT)</h2>
+						<p>
+							SSH keys are more secure and convenient for frequent Git operations, while PATs are simpler to set up but less secure.
+						</p>
+						<hr style="border: 2px solid #ccc;">
+
+						<h2><u>Steps</u></h2>
+
+						<h3>Step 1: Check for existing SSH keys</h3>
+						<p>
+							First, check if you already have SSH keys on your computer. Open your terminal (Command Prompt, PowerShell, or Git Bash) and run:
+						</p>
+						<pre class="code-dark"><code>ls -al ~/.ssh</code></pre>
+						<p>
+							If you see a file named <code class="code-inline-dark">id_rsa</code> and <code class="code-inline-dark">id_rsa.pub</code> OR <code class="code-inline-dark">id_ed25519</code> and <code class="code-inline-dark">id_ed25519.pub</code>, you already have an SSH key pair. Like this:
+						</p>
+							<pre class="code-dark"><code><span class="magenta-text">rando@randos-pc:~/project_directory/$</span> ls ~/.ssh
+id_ed25519  id_ed25519.pub  known_hosts known_hosts.old</code></pre>
+							<p>
+								Here, <code class="code-inline-dark">id_ed25519</code> is the private key (WHICH YOU DO NOT GIVE TO ANYBODY!!!), <code class="code-inline-dark">id_ed25519.pub</code> is the public key, <code class="code-inline-dark">known_hosts</code> is a file where SSH stores trusted server host keys (for example, GitHub), and <code class="code-inline-dark">known_hosts.old</code> is a file An automatic backup created when SSH updates or changes entries in known_hosts.<BR/>
+								In my case, I used the <i>Ed25519</i> key algorithm for SSH key generation. If you don't have these files, proceed to <b>Step 2</b> to generate a new SSH private-public key pair.
+							</p>
+								<details class="info-box">
+									<summary><i class="icon solid fa-info-circle"></i> RSA vs Ed25519 <span class="icon solid fa-angle-down info-arrow"></span></summary>
+									<p>
+										<a href="https://cr.yp.to/ecdh.html">Ed25519 (Curve25519)</a> is newer, faster, and uses shorter keys; RSA is older and kept for compatibility with systems that don’t support Ed25519.
+									</p>
+									<ul>
+										<li><b>Ed25519:</b> Best choice for new SSH keys unless a system forbids it.</li>
+										<li><b>RSA:</b> Choose if you must support legacy services or hardware.</li>
+									</ul>
+								</details>
+
+							<h3>Step 2: Generate a new SSH key</h3>
+						<p>
+							To generate a new SSH key pair, run the following command, replacing "your_email@example.com" with the email address that you are using for Github. <i>-t</i> Indicates the type of cryptographic algorithm you are using to generate the key, and <i>-C</i> adds a label to the key with your email address:
+						</p>
+						<pre class="code-dark"><code><span class="magenta-text">rando@randos-pc:~/project_directory/$</span> ssh-keygen -t ed25519 -C "your_email@example.com"</code></pre>
+						<p>
+							When prompted to "Enter a file in which to save the key," press Enter to accept the default file location (Don't try to fix what isn't broken nomally).<br/>
+							Next, you'll be prompted to enter a passphrase. You can choose to enter a passphrase for added security or leave it empty for no passphrase and press Enter:
+						</p>
+						<pre class="code-dark"><code>Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/rando/.ssh/id_ed25519):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:</code></pre>
+						<p>Then you should see something like this:</p>
+						<pre class="code-dark"><code>Your identification has been saved in /home/user/.ssh/id_ed25519
+Your public key has been saved in /home/user/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:3kX9GmFQkZPpZJc3H6z0x2M7Y8A1N0ZqL2Kx9eA1B2C your_email_or_descriptive_label
+The key's randomart image is:
++--[ED25519 256]--+
+| .o.. .         |
+|o .+o+          |
+| .+O+o          |
+|  +B*+          |
+| .oS*           |
+|  . o           |
+|                |
+|                |
++----[SHA256]----+</code></pre>
+
+						<h3>Step 3: Add your SSH key to the GitHub account</h3>
+						<p>
+							After generating your SSH key, you need to add it to your GitHub account. For this execute <code class="code-inline-dark">cat ~/.ssh/id_ed25519.pub</code> command. This will display the PUBLIC key that you need to add to your github account. The output of this command will look something like this:
+						</p>
+						<pre class="code-dark"><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILq7sJwN8V2Z3F3X9M4Q+H2oZ6JZJZk9M1qR3A1B2C3D your_email@example.com</code></pre>
+						<p>
+							In this the first part, <code class="code-inline-dark">ssh-ed25519</code> is your cryptography algorithm for the key generation, the second part starting with <code class="code-inline-dark">AAAAC3NzaC1lZDI1NTE5AAAAI...</code> is your actual public key, and the last part is your email address (which you set up with the <i>-C</i> flag earlier).<br/>
+							Copy this entire console output line and then proceed to the following steps:
+						</p>
+						<ul>
+							<li>Go to your Github page, and click on your profile picture in the top right corner. In the drop down, click on <b>Settings</b>.</li>
+							<span class="image main">
+								<img
+									src="../../images/my_literature/tech/github_ssh_init/step_1.png"
+									alt="step_1"
+									style="width:100%; max-width:640px; display:block; margin:0 auto;"
+								/>
+							</span>
+							<li>Click on <b>SSH and GPG keys</b>:</li>
+							<span class="image main">
+								<img
+									src="../../images/my_literature/tech/github_ssh_init/step_2.png"
+									alt="step_2"
+									style="width:30%; max-width:640px; display:block; margin:0 auto;"
+								/>
+							</span>
+							<li>Click on <b>New SSH key</b>:</li>
+							<span class="image main">
+									<img
+										src="../../images/my_literature/tech/github_ssh_init/step_3.png"
+										alt="step_3"
+										style="width:100%; max-width:1024px; display:block; margin:0 auto;"
+									/>
+							</span>
+							<li>In the <b>Title</b> field, add a descriptive label for the new key.<br/>
+								In the <b>Key</b> field, paste your console output line that you copied earlier.<br/>
+								Then, click on <b>Add SSH key</b> to save the new key to your GitHub account.<br/>
+								You may be prompted to enter your GitHub password to confirm the addition of the new SSH key.
+								<span class="image main">
+									<img
+										src="../../images/my_literature/tech/github_ssh_init/step_4.png"
+										alt="step_4"
+										style="width:100%; max-width:1024px; display:block; margin:0 auto;"
+									/>
+								</span>
+								You should now see a confirmation message indicating that your SSH key has been successfully added to your GitHub account.
+							</li>							
+						</ul>
+
+						<h3>Step 4: Testing the SSH connection</h3>
+						<p> After this, we test the SSH connection by executing this command in the terminal:
+							<pre class="code-dark" style="margin: 0.75em 0;"><code><span class="magenta-text">rando@randos-pc:~/project_directory/$</span> ssh -T git@github.com</code></pre>
+							This should give you an output similar to this <a href="#ref2">[2]</a>:
+							<pre class="code-dark" style="margin: 0.75em 0;"><code>The authenticity of host 'github.com (140.82.113.4)' can't be established.
+ED25519 key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+							At this prompt, type in <b>yes</b> and press Enter. You should then see a message like this:
+							<pre class="code-dark" style="margin: 0.75em 0;"><code>Hi &lt;github_username&gt;! You've successfully authenticated, but GitHub does not provide shell access.</code></pre>
+							This indicates that your SSH key is correctly set up and you can now use Git operations via SSH. Hari Om!
+						</p>
+						<p>
+							At this point, you can just go to your github repo, click on the green <b>Code</b> button, select <b>SSH</b>, copy the SSH URL, and use it with <code class="code-inline-dark">git clone</code> command in your like this:
+							<span class="image main">
+								<img
+									src="../../images/my_literature/tech/github_ssh_init/step_5.png"
+									alt="step_5"
+									style="width:100%; max-width:1024px; display:block; margin:0 auto;"
+								/>
+							</span>
+							Then, execute this in the terminal:
+							<pre class="code-dark" style="margin: 0.75em 0;"><code><span class="magenta-text">rando@randos-pc:~/directory_where_you_want_to_clone/$</span> git clone &lt;link_that_you_just_copied&gt;</code></pre>
+							Now you are good to go to execute all the git command to do whatever you want with your repository! Enjoy! Also, thank you very much for reading my first technical blog!
+						</p>
+						<p align="right">
+							<i>
+								-Aniket N. Prabhu<br/>
+								1/4/2026
+							</i>
+						</p>
+
+						<hr style="border: 2px solid #ccc;">
+						<h2>References</h2>
+						<ol>
+							<li id="ref1">GitHub, Token authentication requirements for Git operations, GitHub Blog, July 26, 2021. Available: <a href="https://github.blog/security/application-security/token-authentication-requirements-for-git-operations/">https://github.blog/security/application-security/token-authentication-requirements-for-git-operations/</a></li>
+							<li id="ref2">Oracle, Working with the known_hosts file, Oracle Linux OpenSSH Documentation. Available: <a href="https://docs.oracle.com/en/operating-systems/oracle-linux/openssh/openssh-WorkingWithknownhosts.html">https://docs.oracle.com/en/operating-systems/oracle-linux/openssh/openssh-WorkingWithknownhosts.html</a></li>
+					</div>
+				</section>					
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="copyright">
+						<li>&copy; 2026 Aniket Niranjan Prabhu</li>
+					</ul>
+				</div>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../assets/js/jquery.min.js"></script>
+		<script src="../../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../../assets/js/jquery.scrollex.min.js"></script>
+		<script src="../../assets/js/browser.min.js"></script>
+		<script src="../../assets/js/breakpoints.min.js"></script>
+		<script src="../../assets/js/util.js"></script>
+		<script src="../../assets/js/main.js"></script>
+
+	</body>
+</html>
